@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checkout — Aether Line</title>
+<link rel="icon" href="assets/logohitam.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/checkout.css">
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav__row">
+    <a href="index.html" class="nav__brand">
+      <img src="assets/logohitam.png" alt="" style="width:2rem; height:auto;">
+      <span>AETHER LINE<span class="sub">Streetwear Custom</span></span>
+    </a>
+    <nav class="nav__links">
+      <a href="index.html">Beranda</a>
+      <a href="katalog.html">Katalog</a>
+      <a href="index.html#tentang">Tentang</a>
+      <a href="index.html#kontak">Kontak</a>
+    </nav>
+    <div style="display:flex; align-items:center; gap:1rem;">
+      <a href="keranjang.html" class="nav__cart">
+        Keranjang <span class="nav__cart-count" data-cart-count>0</span>
+      </a>
+      <button class="nav__toggle" aria-label="Buka menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<section class="section checkout-section">
+  <div class="wrap checkout-wrap">
+
+    <!-- ============ FORM FLOW (visible before payment) ============ -->
+    <div id="checkout-flow">
+      <p class="eyebrow">Langkah 2 dari 2</p>
+      <h1 style="font-size:clamp(2rem,4vw,3rem); margin-bottom:var(--space-4);">Checkout</h1>
+
+      <form id="checkout-form" novalidate>
+
+        <!-- Akun & Kontak -->
+        <div class="ck-block">
+          <h3>1. Akun &amp; Kontak</h3>
+          <p class="ck-block__hint">Masuk dengan email untuk menerima update status pesananmu.</p>
+          <div class="field">
+            <label for="f-email">Email (Login)</label>
+            <input type="email" id="f-email" name="email" placeholder="namakamu@email.com" required>
+          </div>
+        </div>
+
+        <!-- Alamat Pengiriman -->
+        <div class="ck-block">
+          <h3>2. Alamat Pengiriman</h3>
+          <div class="field-grid">
+            <div class="field">
+              <label for="f-nama">Nama Penerima</label>
+              <input type="text" id="f-nama" name="nama" placeholder="Nama lengkap" required>
+            </div>
+            <div class="field">
+              <label for="f-hp">No. HP / WhatsApp</label>
+              <input type="tel" id="f-hp" name="hp" placeholder="08xxxxxxxxxx" required>
+            </div>
+          </div>
+          <div class="field">
+            <label for="f-alamat">Alamat Lengkap</label>
+            <textarea id="f-alamat" name="alamat" rows="2" placeholder="Nama jalan, nomor rumah, RT/RW, patokan" required></textarea>
+          </div>
+          <div class="field-grid field-grid--3">
+            <div class="field">
+              <label for="f-kota">Kota</label>
+              <input type="text" id="f-kota" name="kota" placeholder="Lhokseumawe" required>
+            </div>
+            <div class="field">
+              <label for="f-provinsi">Provinsi</label>
+              <input type="text" id="f-provinsi" name="provinsi" placeholder="Aceh" required>
+            </div>
+            <div class="field">
+              <label for="f-kodepos">Kode Pos</label>
+              <input type="text" id="f-kodepos" name="kodepos" placeholder="24355" required>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ringkasan Pesanan -->
+        <div class="ck-block">
+          <h3>3. Ringkasan Pesanan</h3>
+          <div id="order-review"></div>
+        </div>
+
+        <!-- Metode Pembayaran -->
+        <div class="ck-block">
+          <h3>4. Metode Pembayaran</h3>
+          <div class="pay-grid" id="pay-grid"></div>
+          <p class="pay-note" id="pay-note"></p>
+        </div>
+
+        <!-- Total + Pay Now (paling bawah halaman) -->
+        <div class="ck-total">
+          <div class="ck-total__row"><span>Subtotal</span><strong id="ck-subtotal">Rp0</strong></div>
+          <div class="ck-total__row"><span>Ongkir</span><span style="color:#8b8478;">Ditanggung penjual</span></div>
+          <hr class="stitch">
+          <div class="ck-total__row ck-total__grand"><span>Total Bayar</span><strong id="ck-grandtotal">Rp0</strong></div>
+          <p class="ck-error" id="ck-error"></p>
+          <button type="submit" class="btn btn--primary btn--block ck-pay-btn" id="pay-now-btn">Bayar Sekarang</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- ============ RECEIPT / STRUK (shown after payment) ============ -->
+    <div id="receipt" hidden>
+      <p class="eyebrow">Pesanan Diterima</p>
+      <h2 style="margin-bottom:var(--space-3);">Terima kasih! Struk pesananmu sudah siap.</h2>
+
+      <div class="ticket">
+        <div class="ticket__top">
+          <div class="ticket__brand">
+            <img src="assets/logoputih.png" alt="" style="width:2rem; height:auto;">
+            AETHER LINE
+          </div>
+          <span class="ticket__order-id" id="r-order-id"></span>
+        </div>
+
+        <div class="ticket__row"><span>Tanggal</span><strong id="r-date"></strong></div>
+        <div class="ticket__perf" aria-hidden="true"></div>
+
+        <h4>Penerima</h4>
+        <div class="ticket__row"><span>Nama</span><strong id="r-nama"></strong></div>
+        <div class="ticket__row"><span>No. HP</span><strong id="r-hp"></strong></div>
+        <div class="ticket__row"><span>Alamat</span><strong id="r-alamat"></strong></div>
+        <div class="ticket__row"><span>Email</span><strong id="r-email"></strong></div>
+
+        <div class="ticket__perf" aria-hidden="true"></div>
+
+        <h4>Barang Dibeli</h4>
+        <div id="r-items"></div>
+
+        <div class="ticket__perf" aria-hidden="true"></div>
+
+        <div class="ticket__row"><span>Metode Bayar</span><strong id="r-payment"></strong></div>
+        <div class="ticket__row ticket__row--total"><span>Total</span><strong id="r-total"></strong></div>
+
+        <div class="ticket__perf" aria-hidden="true"></div>
+
+        <h4>Dikirim Dari</h4>
+        <p class="ticket__store">
+          Aether Line — Gampong Batuphat Timur,<br>
+          Kec. Muara Satu, Kota Lhokseumawe, Aceh
+        </p>
+      </div>
+
+      <div class="receipt-actions">
+        <button type="button" class="btn btn--dark" id="r-download">Unduh Struk (PNG)</button>
+        <a href="https://wa.me/message/5M3PZ4YM7HZQF1" class="btn btn--primary" id="r-wa-confirm">Konfirmasi via WhatsApp</a>
+        <a href="index.html" class="btn btn--ghost">Kembali ke Beranda</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<a href="#" class="chat-float" data-wa-float aria-label="Chat WhatsApp">
+  <span class="chat-float__ping"></span>
+  <img src="assets/wa.png" alt="" class="chat-float__icon" style="width:2.5rem; height:auto;">
+</a>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
+<script src="js/main.js"></script>
+<script src="js/products.js"></script>
+<script src="js/checkout.js"></script>
+</body>
+</html>

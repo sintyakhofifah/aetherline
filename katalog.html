@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Katalog Produk — Aether Line</title>
+<link rel="icon" href="assets/logohitam.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/katalog.css">
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav__row">
+    <a href="index.html" class="nav__brand">
+      <img src="assets/logohitam.png" alt="" style="width:2rem; height:auto;">
+      <span>AETHER LINE<span class="sub">Streetwear Custom</span></span>
+    </a>
+    <nav class="nav__links">
+      <a href="index.html">Beranda</a>
+      <a href="katalog.html" class="is-active">Katalog</a>
+      <a href="index.html#tentang">Tentang</a>
+      <a href="index.html#kontak">Kontak</a>
+    </nav>
+    <div style="display:flex; align-items:center; gap:1rem;">
+      <a href="keranjang.html" class="nav__cart">
+        Keranjang <span class="nav__cart-count" data-cart-count>0</span>
+      </a>
+      <button class="nav__toggle" aria-label="Buka menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<section class="section katalog-head">
+  <div class="wrap">
+    <p class="eyebrow">Katalog</p>
+    <h1 style="font-size:clamp(2rem,4vw,3rem);">Pilih siap pakai,<br>atau bikin versimu sendiri.</h1>
+    <p class="lede">Produk berlabel <span class="tag tag--custom" style="vertical-align:middle;">Custom Design</span> mengizinkanmu mengunggah desain sendiri dan kami akan mencetaknya sesuai permintaanmu sebelum dimasukkan ke keranjang.</p>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0;" id="custom">
+  <div class="wrap">
+    <div class="filter-tabs" id="filter-tabs">
+      <button class="filter-tabs__btn is-active" data-filter="Semua">Semua</button>
+      <button class="filter-tabs__btn" data-filter="Ready Stock">Ready Stock</button>
+      <button class="filter-tabs__btn" data-filter="Custom Design">Custom Design</button>
+    </div>
+
+    <div class="grid-products" id="product-grid"></div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">
+          <img src="assets/logoputih.png" alt="" style="width:2rem; height:auto;">
+          AETHER LINE
+        </div>
+        <p class="footer__tagline">Streetwear custom dari Lhokseumawe untuk generasi muda yang ingin berekspresi lewat fashion.</p>
+      </div>
+      <div>
+        <h4>Navigasi</h4>
+        <ul>
+          <li><a href="index.html">Beranda</a></li>
+          <li><a href="katalog.html">Katalog</a></li>
+          <li><a href="keranjang.html">Keranjang</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Kontak</h4>
+        <ul>
+          <li><a href="#" data-wa-float>WhatsApp</a></li>
+          <li><a href="https://www.instagram.com/aetherline._" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Alamat Toko</h4>
+        <ul>
+          <li>Gampong Batuphat Timur</li>
+          <li>Kec. Muara Satu</li>
+          <li>Kota Lhokseumawe, Aceh</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 Aether Line. Seluruh hak cipta dilindungi.</span>
+      <span>Dibuat dengan bangga di Lhokseumawe</span>
+    </div>
+  </div>
+</footer>
+
+<a href="#" class="chat-float" data-wa-float aria-label="Chat WhatsApp">
+  <span class="chat-float__ping"></span>
+  <img src="assets/wa.png" alt="" class="chat-float__icon" style="width:2.5rem; height:auto;">
+</a>
+
+<!-- ============ QUICK ORDER MODAL ============ -->
+<div class="modal" id="product-modal" aria-hidden="true">
+  <div class="modal__overlay" data-close-modal></div>
+  <div class="modal__panel" role="dialog" aria-modal="true" aria-labelledby="modal-product-name">
+    <button class="modal__close" data-close-modal aria-label="Tutup">&times;</button>
+    <div class="modal__grid">
+      <div class="modal__img"><img id="modal-product-img" src="" alt=""></div>
+      <div class="modal__body">
+        <span class="tag" id="modal-product-tag"></span>
+        <h3 id="modal-product-name" style="margin-top:0.5rem;"></h3>
+        <p id="modal-product-desc" style="color:#5c5648; font-size:0.92rem; margin-bottom:0.8rem;"></p>
+        <strong id="modal-product-price" style="font-family:var(--font-mono); color:var(--terracotta); font-size:1.1rem; display:block;"></strong>
+        <p id="modal-price-breakdown" style="font-size:0.78rem; color:#8b8478; margin-bottom:1rem; min-height:1.1em;"></p>
+
+        <label class="field-label">Ukuran</label>
+        <div class="size-picker" id="modal-size-picker"></div>
+
+        <div id="modal-location-block" hidden>
+          <label class="field-label">Lokasi &amp; Ukuran Sablon <span style="color:var(--terracotta);">*wajib</span></label>
+          <div class="location-picker" id="modal-location-picker"></div>
+        </div>
+
+        <div id="modal-custom-upload" class="upload-zone" hidden>
+          <label class="field-label">Upload Desainmu <span style="color:var(--terracotta);">*wajib</span></label>
+          <input type="file" id="modal-file-input" accept="image/png, image/jpeg">
+
+          <div class="upload-zone__preview" id="modal-upload-preview">
+            <span>Belum ada file diunggah. Format JPG/PNG, maks 5MB.</span>
+          </div>
+        </div>
+
+        <label class="field-label">Jumlah</label>
+        <div class="qty-stepper" id="modal-qty">
+          <button type="button" data-step="-1" aria-label="Kurangi">−</button>
+          <span id="modal-qty-val">1</span>
+          <button type="button" data-step="1" aria-label="Tambah">+</button>
+        </div>
+
+        <button class="btn btn--primary btn--block" id="modal-add-btn" style="margin-top:1.4rem;">Tambahkan ke Keranjang</button>
+        <p class="upload-zone__hint" id="modal-hint"></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="js/main.js"></script>
+<script src="js/products.js"></script>
+<script src="js/katalog.js"></script>
+</body>
+</html>
