@@ -1,9 +1,3 @@
-/* =========================================================
-   AETHER LINE — base.css
-   Design tokens + shared components (nav, footer, buttons,
-   floating chat button, "stitch line" signature motif)
-   ========================================================= */
-
 :root {
   /* --- Color tokens --- */
   --ink: #1C1A17;          /* dark ink background */
